@@ -5,6 +5,7 @@
 
 #include <Player.hpp>
 #include <Laser.hpp>
+#include <Enemy.hpp>
 #include <RenderWindow.hpp>
 #include <Math.hpp>
 
@@ -15,10 +16,14 @@ public:
     RenderWindow *window;
     SDL_Texture *spriteSheetTexture;
     std::vector<Laser> lasers;
+    std::vector<Enemy> enemies;
     bool gameRunning;
     double deltaTime;
 
     State();
     ~State();
     void createLaser();
+    void createEnemy();
+    void update();
+    void render();
 };

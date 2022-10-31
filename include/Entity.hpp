@@ -14,5 +14,6 @@ public:
     Entity(Vector2f pos, SDL_Texture *texture);
     Vector2f &getPos();
     SDL_Texture *getTexture();
-    SDL_Rect getCurrentFrame();
+    SDL_Rect &getCurrentFrame();
+    SDL_Rect getPosRect();
 };

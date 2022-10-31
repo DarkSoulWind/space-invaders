@@ -37,6 +37,7 @@ inline void processInput(SDL_Event &event, State &state)
             break;
         case SDLK_SPACE:
             state.createLaser();
+            state.createEnemy();
             break;
         default:
             state.player->updateSprite(PLAYER_SPRITE::IDLE);

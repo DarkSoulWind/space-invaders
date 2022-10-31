@@ -22,7 +22,17 @@ SDL_Texture *Entity::getTexture()
     return m_texture;
 }
 
-SDL_Rect Entity::getCurrentFrame()
+SDL_Rect &Entity::getCurrentFrame()
 {
     return m_currentFrame;
+}
+
+SDL_Rect Entity::getPosRect()
+{
+    SDL_Rect pos;
+    pos.h = m_currentFrame.h;
+    pos.w = m_currentFrame.w;
+    pos.x = m_pos.x;
+    pos.y = m_pos.y;
+    return pos;
 }

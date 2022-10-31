@@ -62,29 +62,11 @@ int main(int argc, char *argv[])
 
         globalState.window->clear();
 
-        // update entities
-        globalState.player->update();
-        int laserPos = 0;
-        for (Laser &laser : globalState.lasers)
-        {
-            if (laser.getPos().y < -laser.getCurrentFrame().h)
-            {
-                globalState.lasers.erase(globalState.lasers.begin() + laserPos);
-                std::cout << "Laser removed" << std::endl;
-            }
-            else
-            {
-                laser.update();
-            }
-            laserPos++;
-        }
+        // UPDATE ENTITIES
+        globalState.update();
 
-        // render entities
-        globalState.window->render(globalState.player, PLAYER_SCALE, PLAYER_SCALE);
-        for (Laser laser : globalState.lasers)
-        {
-            globalState.window->render(&laser, 5, 5);
-        }
+        // RENDER ENTITIES
+        globalState.render();
 
         globalState.window->display();
 

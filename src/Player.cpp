@@ -25,21 +25,27 @@ void Player::update()
 
     // std::cout << "Player velocity: " << m_velocity << std::endl;
 
+    // if player hits left wall
     if (m_pos.x + m_velocity.x <= 0)
     {
+        updateSprite(PLAYER_SPRITE::MOVING_LEFT);
         m_pos.x -= SDL_abs(m_velocity.x) - m_pos.x;
         m_velocity.x *= -1;
     }
+    // if player hits right wall
     if (m_pos.x + m_velocity.x + (m_currentFrame.w * PLAYER_SCALE) >= WINDOW_WIDTH)
     {
+        updateSprite(PLAYER_SPRITE::MOVING_RIGHT);
         m_pos.x += (m_pos.x + m_velocity.x + (m_currentFrame.w * PLAYER_SCALE)) - WINDOW_WIDTH;
         m_velocity.x *= -1;
     }
+    // if player hits top wall
     if (m_pos.y + m_velocity.y <= 0)
     {
         m_pos.y -= SDL_abs(m_velocity.y) - m_pos.y;
         m_velocity.y *= -1;
     }
+    // if player hits bottom wall
     if (m_pos.y + m_velocity.y + (m_currentFrame.h * PLAYER_SCALE) >= WINDOW_HEIGHT)
     {
         m_pos.y += (m_pos.y + m_velocity.y + (m_currentFrame.h * PLAYER_SCALE)) - WINDOW_HEIGHT;
