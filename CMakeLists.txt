@@ -1,9 +1,13 @@
 cmake_minimum_required(VERSION 3.12)
 
-project(SpaceInvaders)
-set(CXX_STANDARD C++20)
-set(SOURCES src/main.cpp src/Entity.cpp src/Math.cpp src/RenderWindow.cpp src/Player.cpp)
+set(CXX_STANDARD C++17)
+set(CMAKE_CXX_STANDARD 17)
+set(PROJECT_SOURCE_DIR src)
+# file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR} *.cpp)
+set(SOURCES src/Enemy.cpp src/Entity.cpp src/Laser.cpp src/main.cpp src/Math.cpp src/Player.cpp src/RenderWindow.cpp src/State.cpp)
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+project(SpaceInvaders LANGUAGES CXX VERSION 1.0)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)

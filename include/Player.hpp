@@ -1,7 +1,10 @@
 #pragma once
 #include <Entity.hpp>
+#include <Math.hpp>
 
-#define PLAYER_VELOCTIY 20.f
+#define PLAYER_VELOCTIY 2.f
+#define PLAYER_MAX_VELOCTIY 5.f
+#define PLAYER_SCALE 6
 
 enum PLAYER_SPRITE
 {
@@ -13,15 +16,12 @@ enum PLAYER_SPRITE
 class Player : public Entity
 {
 private:
+    Vector2f m_velocity;
+
 public:
     Player(Vector2f pos, SDL_Texture *texture);
-    void render(SDL_Renderer *renderer);
     void updateSprite(PLAYER_SPRITE sprite);
     void update();
 
-    inline void changePos(float x, float y)
-    {
-        m_pos.x += x;
-        m_pos.y += y;
-    }
+    void addForce(float x, float y);
 };

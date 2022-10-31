@@ -3,6 +3,7 @@
 
 namespace utils
 {
+    // Getting the time in seconds.
     inline float hireTimeInSeconds()
     {
         float t = SDL_GetTicks();

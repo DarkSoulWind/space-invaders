@@ -71,24 +71,6 @@ void RenderWindow::clear()
     SDL_RenderClear(renderer);
 }
 
-void RenderWindow::render(Entity &entity)
-{
-
-    SDL_Rect srcQuad;
-    srcQuad.x = entity.getCurrentFrame().x;
-    srcQuad.y = entity.getCurrentFrame().y;
-    srcQuad.w = entity.getCurrentFrame().w;
-    srcQuad.h = entity.getCurrentFrame().h;
-
-    SDL_Rect destQuad;
-    destQuad.x = entity.getPos().x;
-    destQuad.y = entity.getPos().y;
-    destQuad.w = entity.getCurrentFrame().w;
-    destQuad.h = entity.getCurrentFrame().h;
-
-    SDL_RenderCopy(renderer, entity.getTexture(), &srcQuad, &destQuad);
-}
-
 void RenderWindow::display()
 {
     SDL_RenderPresent(renderer);

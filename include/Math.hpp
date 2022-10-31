@@ -19,3 +19,5 @@ struct Vector2f
 };
 
 std::ostream &operator<<(std::ostream &, const Vector2f &);
+
+void clamp(float &x, float max, float min);

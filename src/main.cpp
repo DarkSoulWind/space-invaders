@@ -13,23 +13,9 @@
 #include <Utils.hpp>
 #include <State.hpp>
 #include <Input.hpp>
-
-#define NUM_RECTS 50
+#include <Player.hpp>
 
 State globalState;
-
-template <typename T>
-void printArray(T values[], std::size_t size)
-{
-    std::cout << "[ ";
-    for (int i = 0; i < size; ++i)
-    {
-        if (i != 0)
-            std::cout << ", ";
-        std::cout << values[i];
-    }
-    std::cout << " ]";
-}
 
 int main(int argc, char *argv[])
 {
@@ -44,7 +30,7 @@ int main(int argc, char *argv[])
 
     std::cout << "Refresh rate: " << globalState.window->getRefreshRate() << std::endl;
 
-    SDL_Surface *windowIcon = IMG_Load("assets/grass_block.png");
+    SDL_Surface *windowIcon = IMG_Load("../res/sprites.png");
     SDL_SetWindowIcon(globalState.window->getWindow(), windowIcon);
 
     SDL_Event event;
@@ -68,21 +54,38 @@ int main(int argc, char *argv[])
             {
                 processInput(event, globalState);
             }
-            // if (SDL_PollEvent(&event) == NULL)
-            // {
-            //     globalState.player->updateSprite(PLAYER_SPRITE::IDLE);
-            // }
             accumulator -= timeStep;
         }
 
         accumulator = accumulator / timeStep;
+        // std::cout << "Accumulator: " << accumulator << std::endl;
 
         globalState.window->clear();
 
         // update entities
+        globalState.player->update();
+        int laserPos = 0;
+        for (Laser &laser : globalState.lasers)
+        {
+            if (laser.getPos().y < -laser.getCurrentFrame().h)
+            {
+                globalState.lasers.erase(globalState.lasers.begin() + laserPos);
+                std::cout << "Laser removed" << std::endl;
+            }
+            else
+            {
+                laser.update();
+            }
+            laserPos++;
+        }
 
         // render entities
-        globalState.player->render(globalState.window->getRenderer());
+        globalState.window->render(globalState.player, PLAYER_SCALE, PLAYER_SCALE);
+        for (Laser laser : globalState.lasers)
+        {
+            globalState.window->render(&laser, 5, 5);
+        }
+
         globalState.window->display();
 
         // get it display at vsync
