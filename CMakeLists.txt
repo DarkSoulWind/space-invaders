@@ -13,7 +13,13 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIRS})
-include_directories(./include)
+include_directories(include)
+include_directories(lib/imgui)
+include_directories(lib/imgui/backends)
 
-add_executable(SpaceInvaders ${SOURCES})
+add_executable(SpaceInvaders ${SOURCES} lib/imgui/backends/imgui_impl_sdl.cpp lib/imgui/backends/imgui_impl_sdlrenderer.cpp lib/imgui/imgui_demo.cpp lib/imgui/imgui_draw.cpp lib/imgui/imgui_tables.cpp lib/imgui/imgui_widgets.cpp lib/imgui/imgui.cpp)
+
 target_link_libraries(SpaceInvaders ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
+# needed for imgui
+target_link_libraries(SpaceInvaders "-framework OpenGl")
